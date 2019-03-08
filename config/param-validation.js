@@ -2,7 +2,7 @@ const Joi = require('joi');
 
 module.exports = {
   // POST /devis
-  createDevis: {
+  create: {
     body: {
       firstname: Joi.string().required(),
       lastname: Joi.string().required(),
@@ -11,4 +11,16 @@ module.exports = {
       detail: Joi.object().required()
     }
   },
+  auth: {
+    login: {
+      email: Joi.string().required(),
+      password: Joi.string().required()
+    }
+  },
+  user: {
+    create: {
+      email: Joi.string().required(),
+      password: Joi.string().required()
+    }
+  }
 };

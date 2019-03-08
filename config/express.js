@@ -9,6 +9,7 @@ const expressValidation = require('express-validation');
 const helmet = require('helmet');
 const routes = require('../index.route');
 const config = require('./config');
+const passport = require('./passport')
 const APIError = require('../server/helpers/APIError');
 
 const app = express();
@@ -17,7 +18,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(cookieParser());
+app.use(cookieParser(config.jwt.secret));
 app.use(compress());
 app.use(methodOverride());
 
@@ -25,7 +26,12 @@ app.use(methodOverride());
 app.use(helmet());
 
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors());
+app.use(cors({
+  origin: config.acceptOrigin,
+  credentials: true
+}));
+
+app.use(passport.initialize());
 
 // mount all routes on / path
 app.use('/', routes);

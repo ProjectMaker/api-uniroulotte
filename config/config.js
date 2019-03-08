@@ -19,6 +19,8 @@ const envVarsSchema = Joi.object({
     }),
   JWT_SECRET: Joi.string().required()
     .description('JWT Secret required to sign'),
+  ACCEPT_ORIGIN: Joi.string().required()
+    .description('Cors accept origin'),
   MONGO_HOST: Joi.string().required()
     .description('Mongo DB host url'),
   MONGO_PORT: Joi.number()
@@ -38,7 +40,19 @@ const config = {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
   mongooseDebug: envVars.MONGOOSE_DEBUG,
+  acceptOrigin: envVars.ACCEPT_ORIGIN,
   jwtSecret: envVars.JWT_SECRET,
+  jwt: {
+    secret: envVars.JWT_SECRET,
+    options: {
+      expiresIn: '1y'
+    },
+    cookie: {
+      httpOnly: true,
+      sameSite: true,
+      signed: true
+    }
+  },
   mongo: {
     host: envVars.MONGO_HOST,
     port: envVars.MONGO_PORT

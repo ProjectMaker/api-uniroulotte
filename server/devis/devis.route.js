@@ -1,12 +1,16 @@
 const express = require('express');
 const validate = require('express-validation');
 const paramValidation = require('../../config/param-validation');
+const passport = require('passport')
 const devisCtrl = require('./devis.controller');
 
 const router = express.Router(); // eslint-disable-line new-cap
 
-/** POST /api/auth/login - Returns token if correct username and password is provided */
 router.route('/')
-  .post(validate(paramValidation.createDevis), devisCtrl.createDevis);
+  /** GET /devis - Get© list of devis */
+  .get([passport.authenticate('jwt-cookiecombo', { session: false })], devisCtrl.list)
+
+  /** POST /devis - Create new devis */
+  .post(validate(paramValidation.create), devisCtrl.create);
 
 module.exports = router;

@@ -1,11 +1,8 @@
 const mongoose = require('mongoose');
-const util = require('util');
 
 // config should be imported before importing any other file
 const config = require('./config/config');
 const app = require('./config/express');
-
-const debug = require('debug')('express-mongoose-es6-rest-api:index');
 
 // make bluebird default Promise
 Promise = require('bluebird'); // eslint-disable-line no-global-assign
@@ -23,7 +20,7 @@ mongoose.connection.on('error', () => {
 // print mongoose logs in dev env
 if (config.mongooseDebug) {
   mongoose.set('debug', (collectionName, method, query, doc) => {
-    debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
+    // debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
   });
 }
 
