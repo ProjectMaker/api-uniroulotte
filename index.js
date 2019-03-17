@@ -11,11 +11,26 @@ Promise = require('bluebird'); // eslint-disable-line no-global-assign
 mongoose.Promise = Promise;
 
 // connect to mongo db
-const mongoUri = config.mongo.host;
-mongoose.connect(mongoUri, { server: { socketOptions: { keepAlive: 1 } } });
-mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${mongoUri}`);
-});
+const options = {
+  autoIndex: false, // Don't build indexes
+  reconnectTries: 30, // Retry up to 30 times
+  reconnectInterval: 500, // Reconnect every 500ms
+  poolSize: 10, // Maintain up to 10 socket connections
+  // If not connected, return errors immediately rather than waiting for reconnect
+  bufferMaxEntries: 0
+}
+const connectWithRetry = () => {
+  console.log('MongoDB connection with retry')
+  mongoose.connect(config.mongo.host, options)
+    .then(() => {
+      console.log('MongoDB is connected');
+    })
+    .catch(() => {
+      console.log('MongoDB connection unsuccessful, retry after 5 seconds.')
+      setTimeout(connectWithRetry, 5000);
+    });
+}
+connectWithRetry()
 
 // print mongoose logs in dev env
 if (config.mongooseDebug) {

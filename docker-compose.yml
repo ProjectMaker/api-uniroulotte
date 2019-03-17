@@ -1,0 +1,21 @@
+version: "3.6"
+services:
+  app:
+    build: .
+    volumes:
+    - ./:/app
+    - /app/node_modules
+    depends_on:
+    - mongo
+    environment:
+      NODE_ENV: development
+    ports:
+    - 8080:4040
+  mongo:
+    image: mongo
+    expose:
+    - 27017
+    ports:
+    - 27017:27017
+    volumes:
+    - ../../mongo/sandbox:/data/db
