@@ -1,4 +1,4 @@
-const sendEmail = require('../helpers/SendEmail');
+const sendEmail = require('../../utils/SendEmail');
 const Devis = require('./devis.model');
 
 const create = (req, res, next) => {

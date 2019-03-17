@@ -5,7 +5,7 @@ const passportLocal = require('passport-local')
 const config = require('./config');
 const JwtCookieComboStrategy = require('passport-jwt-cookiecombo');
 
-const APIError = require('../server/helpers/APIError');
+const APIError = require('../utils/APIError');
 
 const LocalStrategy = passportLocal.Strategy;
 const User = mongoose.model('User');

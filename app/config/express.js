@@ -10,7 +10,7 @@ const helmet = require('helmet');
 const routes = require('../index.route');
 const config = require('./config');
 const passport = require('./passport')
-const APIError = require('../server/helpers/APIError');
+const APIError = require('../utils/APIError');
 
 const app = express();
 

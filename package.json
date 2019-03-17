@@ -11,13 +11,13 @@
     "yarn": ">=1.5.1"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "lint": "esw *.js server config --color",
+    "start": "nodemon app/index.js",
+    "lint": "esw *.js app config --color",
     "lint:watch": "npm run lint -- --watch",
     "precommit": "npm run lint && npm test",
-    "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors server --recursive",
+    "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors app --recursive",
     "test:watch": "npm test -- --watch",
-    "test:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/istanbul cover _mocha -- --ui bdd --reporter spec --colors server --recursive",
+    "test:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/istanbul cover _mocha -- --ui bdd --reporter spec --colors app --recursive",
     "test:check-coverage": "npm run test:coverage && istanbul check-coverage",
     "report-coverage": "coveralls < ./coverage/lcov.info",
     "deploy:production": "shipit production deploy"

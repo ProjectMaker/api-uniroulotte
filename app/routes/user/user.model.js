@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const httpStatus = require('http-status');
 
-const APIError = require('../helpers/APIError');
+const APIError = require('../../utils/APIError');
 const config = require('../../config/config');
 /**
  * User Schema

@@ -1,6 +1,6 @@
 const express = require('express');
-const devisRoutes = require('./server/devis/devis.route');
-const userRoutes = require('./server/user/user.route');
+const devisRoutes = require('./routes/devis/devis.route');
+const userRoutes = require('./routes/user/user.route');
 
 const router = express.Router(); // eslint-disable-line new-cap
 

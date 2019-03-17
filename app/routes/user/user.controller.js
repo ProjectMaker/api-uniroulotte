@@ -2,7 +2,7 @@ const passport = require('passport')
 const httpStatus = require('http-status');
 
 const config = require('../../config/config')
-const APIError = require('../helpers/APIError');
+const APIError = require('../../utils/APIError');
 const User = require('./user.model');
 
 /**

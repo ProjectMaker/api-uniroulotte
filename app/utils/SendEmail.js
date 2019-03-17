@@ -1,5 +1,5 @@
 const mailjet = require('node-mailjet');
-const config = require('../../config/config');
+const config = require('../config/config');
 
 const getMessage = (to, firstname, lastname, price) => [
   {
