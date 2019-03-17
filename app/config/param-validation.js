@@ -1,4 +1,4 @@
-const Joi = require('joi');
+const Joi = require('joi')
 
 module.exports = {
   // POST /devis
@@ -23,4 +23,4 @@ module.exports = {
       password: Joi.string().required()
     }
   }
-};
+}

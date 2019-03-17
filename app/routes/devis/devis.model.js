@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 /**
  * User Schema
@@ -28,7 +28,7 @@ const DevisSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-});
+})
 
 DevisSchema.statics = {
   /**
@@ -42,11 +42,11 @@ DevisSchema.statics = {
       .sort({ createdAt: -1 })
       .skip(+skip)
       .limit(+limit)
-      .exec();
+      .exec()
   }
-};
+}
 
 /**
  * @typedef Devis
  */
-module.exports = mongoose.model('Devis', DevisSchema);
+module.exports = mongoose.model('Devis', DevisSchema)

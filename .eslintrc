@@ -1,5 +1,25 @@
 {
+  "env": {
+    "node": true,
+    "mocha": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module"
+  },
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base"
+  ],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
   "rules": {
+    "semi": [2, "never"],
+    "comma-dangle": ["error", "never"],
+    "no-underscore-dangle": [0],
+    "func-names": ["error", "never"],
     "indent": [
       2,
       2,
@@ -13,35 +33,6 @@
         "anonymous": "always",
         "named": "never"
       }
-    ],
-    "no-use-before-define": [
-      2,
-      "nofunc"
-    ],
-    // TODO: turn on later
-    "comma-dangle": [
-      0
-    ],
-    "import/no-extraneous-dependencies": [
-      "error",
-      {
-        "devDependencies": true
-      }
-    ],
-    "no-underscore-dangle": [
-      0
     ]
-  },
-  "env": {
-    "node": true,
-    "mocha": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
-  },
-  "extends": [
-    "eslint:recommended",
-    "airbnb-base"
-  ]
+  }
 }

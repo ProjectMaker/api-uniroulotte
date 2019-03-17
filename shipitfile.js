@@ -1,7 +1,7 @@
 /* eslint-disable global-require */
-module.exports = function (shipit) {
-  require('shipit-deploy')(shipit);
-  require('shipit-npm')(shipit);
+const initShipit = (shipit) => {
+  require('shipit-deploy')(shipit) // eslint-disable-line import/no-extraneous-dependencies
+  require('shipit-npm')(shipit) // eslint-disable-line import/no-extraneous-dependencies
 
   shipit.initConfig({
     default: {
@@ -20,5 +20,7 @@ module.exports = function (shipit) {
       servers: 'uniroulotte@142.93.14.82',
       branch: 'master'
     }
-  });
-};
+  })
+}
+
+module.exports = initShipit

@@ -1,20 +1,20 @@
-const sendEmail = require('../../utils/SendEmail');
-const Devis = require('./devis.model');
+const sendEmail = require('../../utils/SendEmail')
+const Devis = require('./devis.model')
 
 const create = (req, res, next) => {
-  const { email, firstname, lastname, price, detail } = req.body;
+  const { email, firstname, lastname, price, detail } = req.body
   const devis = new Devis({
     email,
     firstname,
     lastname,
     price,
     detail
-  });
+  })
   devis.save()
     .then(() => sendEmail(email, firstname, lastname, price))
     .then(() => res.json())
-    .catch(e => next(e));
-};
+    .catch(e => next(e))
+}
 
 /**
  * Get user list.
@@ -23,10 +23,10 @@ const create = (req, res, next) => {
  * @returns {User[]}
  */
 const list = (req, res, next) => {
-  const { limit = 50, skip = 0 } = req.query;
+  const { limit = 50, skip = 0 } = req.query
   Devis.list({ limit, skip })
     .then(devis => res.json(devis))
-    .catch(e => next(e));
+    .catch(e => next(e))
 }
 
-module.exports = { create, list };
+module.exports = { create, list }

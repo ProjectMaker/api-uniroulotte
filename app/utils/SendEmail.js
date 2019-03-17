@@ -1,5 +1,5 @@
-const mailjet = require('node-mailjet');
-const config = require('../config/config');
+const mailjet = require('node-mailjet')
+const config = require('../config/config')
 
 const getMessage = (to, firstname, lastname, price) => [
   {
@@ -20,15 +20,15 @@ const getMessage = (to, firstname, lastname, price) => [
       PRICE: price
     }
   }
-];
+]
 
 const sendEmail = (to, firstname, lastname, price) => {
-  const client = mailjet.connect(config.mailjet.keyPublic, config.mailjet.keySecret);
+  const client = mailjet.connect(config.mailjet.keyPublic, config.mailjet.keySecret)
   return client
     .post('send', { version: 'v3.1' })
     .request({
       Messages: getMessage(to, firstname, lastname, price)
-    });
-};
+    })
+}
 
-module.exports = sendEmail;
+module.exports = sendEmail

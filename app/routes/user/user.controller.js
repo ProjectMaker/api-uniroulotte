@@ -1,9 +1,9 @@
 const passport = require('passport')
-const httpStatus = require('http-status');
+const httpStatus = require('http-status')
 
 const config = require('../../config/config')
-const APIError = require('../../utils/APIError');
-const User = require('./user.model');
+const APIError = require('../../utils/APIError')
+const User = require('./user.model')
 
 /**
  * Load user and append to req.
@@ -11,16 +11,16 @@ const User = require('./user.model');
 function login(req, res, next) {
   return passport.authenticate('signin-local', { session: false }, (err, user) => {
     if (err) {
-      return next(err);
+      return next(err)
     }
 
     if (user) {
       const token = user.generateJWT()
-      res.cookie('jwt', token, config.jwt.cookie);
-      return res.json({ token });
+      res.cookie('jwt', token, config.jwt.cookie)
+      return res.json({ token })
     }
-    next(new APIError('No such user exists!', httpStatus.NOT_FOUND))
-  })(req, res, next);
+    return next(new APIError('No such user exists!', httpStatus.NOT_FOUND))
+  })(req, res, next)
 }
 
 /**
@@ -33,11 +33,11 @@ function create(req, res, next) {
   const user = new User({
     email: req.body.email,
     password: req.body.password
-  });
+  })
 
   user.save()
     .then(savedUser => res.json(savedUser.toAuthJSON()))
-    .catch(e => next(e));
+    .catch(e => next(e))
 }
 
-module.exports = { login, create };
+module.exports = { login, create }

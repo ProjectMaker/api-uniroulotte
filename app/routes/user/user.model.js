@@ -1,11 +1,11 @@
-const Promise = require('bluebird');
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-const httpStatus = require('http-status');
+const Promise = require('bluebird')
+const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
+const httpStatus = require('http-status')
 
-const APIError = require('../../utils/APIError');
-const config = require('../../config/config');
+const APIError = require('../../utils/APIError')
+const config = require('../../config/config')
 /**
  * User Schema
  */
@@ -16,13 +16,13 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   createdAt: {
     type: Date,
     default: Date.now
   }
-});
+})
 
 /**
  * Add your
@@ -30,38 +30,38 @@ const UserSchema = new mongoose.Schema({
  * - validations
  * - virtuals
  */
-UserSchema.pre('save', function(next) { // eslint-disable-line prefer-arrow-callback
+UserSchema.pre('save', function (next) {
   try {
-    const hash = crypto.createHash('sha256');
+    const hash = crypto.createHash('sha256')
     hash.update(this.password)
     this.password = hash.digest('hex')
-    next();
-  } catch (err) { next(err); }
-});
+    next()
+  } catch (err) { next(err) }
+})
 
 /**
  * Methods
  */
-UserSchema.methods.validatePassword = function(password) {
-  const hash = crypto.createHash('sha256');
+UserSchema.methods.validatePassword = function (password) {
+  const hash = crypto.createHash('sha256')
   hash.update(password)
   return this.password === hash.digest('hex')
-};
+}
 
 UserSchema.methods.generateJWT = function () {
   return jwt.sign({
     email: this.email,
-    id: this._id,
-  }, config.jwt.secret, config.jwt.options);
+    id: this._id
+  }, config.jwt.secret, config.jwt.options)
 }
 
-UserSchema.methods.toAuthJSON = function() {
+UserSchema.methods.toAuthJSON = function () {
   return {
     _id: this._id,
     email: this.email,
-    token: this.generateJWT(),
-  };
-};
+    token: this.generateJWT()
+  }
+}
 /**
  * Statics
  */
@@ -76,11 +76,11 @@ UserSchema.statics = {
       .exec()
       .then((user) => {
         if (user) {
-          return user;
+          return user
         }
-        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
-        return Promise.reject(err);
-      });
+        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND)
+        return Promise.reject(err)
+      })
   },
 
   getByAuth(email, password) {
@@ -88,15 +88,15 @@ UserSchema.statics = {
       .exec()
       .then((user) => {
         if (user && user.validatePassword(password)) {
-          return user;
+          return user
         }
         const err = new APIError('No such user exists!', httpStatus.NOT_FOUND)
-        return Promise.reject(err);
-      });
+        return Promise.reject(err)
+      })
   }
-};
+}
 
 /**
  * @typedef User
  */
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema)

@@ -30,11 +30,11 @@ const envVarsSchema = Joi.object({
   MAILJET_KEY_SECRET: Joi.string().required(),
   MAILJET_TEMPLATE_DEVIS: Joi.number().required()
 }).unknown()
-  .required();
+  .required()
 
-const { error, value: envVars } = Joi.validate(process.env, envVarsSchema);
+const { error, value: envVars } = Joi.validate(process.env, envVarsSchema)
 if (error) {
-  throw new Error(`Config validation error: ${error.message}`);
+  throw new Error(`Config validation error: ${error.message}`)
 }
 
 const config = {
@@ -63,6 +63,6 @@ const config = {
     keySecret: envVars.MAILJET_KEY_SECRET,
     templateDevis: envVars.MAILJET_TEMPLATE_DEVIS
   }
-};
+}
 
-module.exports = config;
+module.exports = config
