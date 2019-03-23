@@ -8,6 +8,8 @@ LICENSE
 
 .env*
 
+deploy-production.sh
+
 Dockerfile*
 docker-compose*
 .dockerignore

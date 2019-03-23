@@ -1,8 +1,9 @@
 /* eslint-disable global-require */
 const Joi = require('joi');
+const dotenv = require('dotenv');
 
 // require and configure dotenv, will load vars in .env in PROCESS.ENV
-require('dotenv').config();
+dotenv.config({ debug: true, path: '/app/shared/.env' })
 
 // define validation for all the env vars
 const envVarsSchema = Joi.object({

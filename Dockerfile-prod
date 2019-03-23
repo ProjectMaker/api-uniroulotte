@@ -4,9 +4,9 @@ RUN apk update && apk add make
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+RUN npm install --production
 
 COPY . .
 
 ENTRYPOINT [ "make" ]
-CMD ["run_dev"]
+CMD ["run_prod"]

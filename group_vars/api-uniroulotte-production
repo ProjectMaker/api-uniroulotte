@@ -1,0 +1,12 @@
+container_name: api-uniroulotte
+container_image: rudeboytom/koalattitude
+container_image_version: prod-latest
+
+container_environment: {}
+
+container_volumes:
+  - /home/uniroulotte/api-uniroulotte/shared/.env:/app/shared/.env
+
+container_ports:
+  - 4000:4040
+

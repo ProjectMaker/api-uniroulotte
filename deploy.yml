@@ -1,0 +1,16 @@
+- hosts: [api-uniroulotte-production]
+  tasks:
+    - name: Destroy {{ container_name }} container
+      docker_container:
+        name: "{{ container_name }}"
+        state: absent
+    - name: Create {{ container_name }} container
+      docker_container:
+        name: "{{ container_name }}"
+        pull: yes
+        image: "{{ container_image }}:{{ container_image_version }}"
+        published_ports: "{{ container_ports }}"
+        volumes: "{{ container_volumes }}"
+        env: "{{ container_environment }}"
+        state: started
+
