@@ -10,6 +10,6 @@ script:
 
 deploy:
   provider: script
-  script: bash docker-push.sh master-latest
+  script: bash docker-push.sh staging-latest
   on:
     branch: master
