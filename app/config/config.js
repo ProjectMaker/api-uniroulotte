@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
-const Joi = require('joi');
-const dotenv = require('dotenv');
+const Joi = require('joi')
+const dotenv = require('dotenv')
 
 // require and configure dotenv, will load vars in .env in PROCESS.ENV
 dotenv.config({ debug: true, path: '/app/shared/.env' })
