@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "nodemon app/index.js",
+    "prod": "node app/index.js",
     "lint": "esw *.js app config --color",
     "lint:watch": "npm run lint -- --watch",
     "precommit": "npm run lint && npm test",

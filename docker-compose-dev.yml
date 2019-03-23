@@ -3,17 +3,17 @@ services:
   app:
     build: .
     volumes:
-    - ./:/app
-    - /app/node_modules
+      - ./:/app
+      - /app/node_modules
     depends_on:
-    - mongo
-    environment:
-      NODE_ENV: development
+      - mongo
+    env_file:
+      - .env-dev
     ports:
     - 8080:4040
   mongo:
     image: mongo
     ports:
-    - 27017:27017
+      - 27017:27017
     volumes:
-    - ../../mongo/sandbox:/data/db
+      - ../../mongo/sandbox:/data/db
