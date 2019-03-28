@@ -1,6 +1,6 @@
 container_name: api-uniroulotte
 container_image: rudeboytom/koalattitude
-container_image_version: prod-latest
+container_image_version: master-latest
 
 container_environment: {}
 
