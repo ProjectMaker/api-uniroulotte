@@ -16,6 +16,9 @@ const DevisSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  phoneNumber: {
+    type: String
+  },
   price: {
     type: String,
     required: true

@@ -2,11 +2,12 @@ const sendEmail = require('../../utils/SendEmail')
 const Devis = require('./devis.model')
 
 const create = (req, res, next) => {
-  const { email, firstname, lastname, price, detail } = req.body
+  const { email, firstname, lastname, phoneNumber, price, detail } = req.body
   const devis = new Devis({
     email,
     firstname,
     lastname,
+    phoneNumber,
     price,
     detail
   })
